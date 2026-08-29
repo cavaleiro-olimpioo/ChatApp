@@ -1,2 +1,2 @@
 # ChatApp
- aplicativo de chat
+aplicativo de chat
