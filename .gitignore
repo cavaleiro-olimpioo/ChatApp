@@ -1,0 +1,4 @@
+csharp.vsix
+*.vsix
+**/obj/
+**/bin/

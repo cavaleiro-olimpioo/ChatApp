@@ -2,11 +2,12 @@ public class Program
 {
     public static void Main(String[] args)
     {
-        Console.Write("Enter your username: ");
-        String username = Console.ReadLine();
+        var builder = WebApplication.CreateBuilder(args);
+        var app = builder.Build();
 
-        Console.WriteLine("-=-=-=-=-= CHATAPP - Welcome, " + username + "! =-=-=-=-=-");
+        app.MapGet("/", () => "Hello, World!");
 
+        app.Run();
 
     }
 }
