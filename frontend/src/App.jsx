@@ -21,6 +21,36 @@ function App() {
       user: 'guilherme',
       message: 'yes, hello world!',
     },
+    {
+      id: 4,
+      user: 'jogumelo',
+      message: 'alguém vai entrar na call?',
+    },
+    {
+      id: 5,
+      user: 'giovanni',
+      message: 'em cinco minutos estou lá',
+    },
+    {
+      id: 6,
+      user: 'guilherme',
+      message: 'combinado. deixo o link aqui',
+    },
+    {
+      id: 7,
+      user: 'jogumelo',
+      message: 'obrigado!',
+    },
+    {
+      id: 8,
+      user: 'giovanni',
+      message: 'pode mandar o horário também?',
+    },
+    {
+      id: 9,
+      user: 'guilherme',
+      message: '21h. sem pressa.',
+    },
   ];
 
   if (!user) {
@@ -28,9 +58,9 @@ function App() {
   }
 
   return (
-    <div className="ambient flex h-screen flex-col text-white">
+    <div className="ambient flex h-dvh max-h-dvh flex-col overflow-hidden text-white">
       <header className="glass shrink-0">
-        <div className="mx-auto flex max-w-3xl items-center justify-between px-5 py-3.5">
+        <div className="mx-auto flex w-full max-w-3xl items-center justify-between px-5 py-3.5">
           <div className="flex items-center gap-2">
             <img className="h-12 w-14 object-contain" src={logo} alt="Concord" />
             <div>
@@ -53,23 +83,27 @@ function App() {
         </div>
       </header>
 
-      <main className="mx-auto flex min-h-0 w-full max-w-3xl flex-1 flex-col">
-        <div className="scroll-chat flex min-h-0 flex-1 flex-col overflow-y-auto px-4 py-5 sm:px-6">
-          <p className="mb-6 self-center rounded-full border border-violet-400/15 bg-indigo-950/30 px-3 py-1 text-[11px] uppercase tracking-[0.16em] text-violet-300/50">
-            Hoje
+      <main className="mx-auto flex min-h-0 w-full max-w-3xl flex-1 flex-col overflow-hidden">
+        <div className="scroll-chat min-h-0 flex-1 overflow-y-auto px-4 py-5 sm:px-6">
+          <p className="mb-6 text-center">
+            <span className="rounded-full border border-violet-400/15 bg-indigo-950/30 px-3 py-1 text-[11px] uppercase tracking-[0.16em] text-violet-300/50">
+              Hoje
+            </span>
           </p>
-          {allMessages.map((message) => (
-            <CardMessage
-              key={message.id}
-              message={message.message}
-              userMsg={message.user}
-              user={user}
-            />
-          ))}
+          <div className="flex flex-col">
+            {allMessages.map((message) => (
+              <CardMessage
+                key={message.id}
+                message={message.message}
+                userMsg={message.user}
+                user={user}
+              />
+            ))}
+          </div>
         </div>
 
         <form
-          className="glass mx-4 mb-5 flex items-center gap-3 rounded-2xl px-3 py-2 sm:mx-6"
+          className="glass mx-4 mb-4 flex shrink-0 items-center gap-3 rounded-2xl px-3 py-2 sm:mx-6"
           action="."
           onSubmit={(event) => event.preventDefault()}
         >
