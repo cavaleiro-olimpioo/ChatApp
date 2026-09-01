@@ -1,14 +1,19 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import logo from '../assets/icons/Logo.png';
 
-function Login({ onEnter }) {
-  const [name, setName] = useState('');
+function Login() {
+  const name = useRef(null);
+  const [inputValue, setInputValue] = useState('');
+  const navigate = useNavigate();
 
-  function handleSubmit(event) {
-    event.preventDefault();
-    const trimmed = name.trim();
-    if (!trimmed) return;
-    onEnter?.(trimmed);
+  function handleSubmit(e) {
+    e.preventDefault();
+    const username = inputValue.trim();
+    if (username) {
+      localStorage.setItem('username', username);
+      navigate('/chat');
+    }
   }
 
   return (
@@ -53,11 +58,12 @@ function Login({ onEnter }) {
                 Nome
               </span>
               <input
+                ref={name}
                 autoFocus
                 autoComplete="nickname"
                 name="username"
-                value={name}
-                onChange={(event) => setName(event.target.value)}
+                value={inputValue}
+                onChange={(e) => setInputValue(e.target.value)}
                 placeholder="Seu nome"
                 className="w-full rounded-2xl border border-violet-400/20 bg-indigo-950/50 px-4 py-3.5 text-sm text-white outline-none transition placeholder:text-violet-300/35 focus:border-violet-400/60 focus:ring-4 focus:ring-violet-500/15"
               />
@@ -65,8 +71,8 @@ function Login({ onEnter }) {
 
             <button
               type="submit"
-              disabled={!name.trim()}
-              className="w-full rounded-2xl bg-gradient-to-r from-indigo-500 via-violet-500 to-purple-500 py-3.5 text-sm font-semibold text-white shadow-[0_10px_30px_rgba(124,58,237,0.35)] transition hover:brightness-110 disabled:cursor-not-allowed disabled:opacity-40"
+              disabled={!inputValue.trim()}
+              className="w-full rounded-2xl bg-linear-to-r from-indigo-500 via-violet-500 to-purple-500 py-3.5 text-sm font-semibold text-white shadow-[0_10px_30px_rgba(124,58,237,0.35)] transition hover:brightness-110 disabled:cursor-not-allowed disabled:opacity-40"
             >
               Entrar
             </button>

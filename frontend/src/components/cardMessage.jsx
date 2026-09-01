@@ -4,7 +4,7 @@ function CardMessage({ message, userMsg, user }) {
   if (isOwn) {
     return (
       <article className="mt-3 flex max-w-[78%] flex-col items-end self-end">
-        <div className="rounded-2xl rounded-br-md bg-gradient-to-br from-indigo-500 via-violet-500 to-purple-600 px-4 py-3 shadow-[0_8px_24px_rgba(76,29,149,0.28)]">
+        <div className="rounded-2xl rounded-br-md bg-linear-to-br from-indigo-500 via-violet-500 to-purple-600 px-4 py-3 shadow-[0_8px_24px_rgba(76,29,149,0.28)]">
           <p className="text-[0.9375rem] leading-relaxed text-white">{message}</p>
         </div>
       </article>

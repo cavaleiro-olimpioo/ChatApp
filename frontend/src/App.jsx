@@ -1,10 +1,22 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import logo from './assets/icons/Logo.png';
 import CardMessage from './components/cardMessage';
 import Login from './components/Login';
+import { useNavigate } from 'react-router-dom';
 
 function App() {
   const [user, setUser] = useState(null);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const username = localStorage.getItem('username');
+    if (username) {
+      setUser(username);
+    } else {
+      navigate('/');
+    }
+  }, [navigate]);
+
   const allMessages = [
     {
       id: 1,
@@ -53,10 +65,6 @@ function App() {
     },
   ];
 
-  if (!user) {
-    return <Login onEnter={setUser} />;
-  }
-
   return (
     <div className="ambient flex h-dvh max-h-dvh flex-col overflow-hidden text-white">
       <header className="glass shrink-0">
@@ -74,7 +82,10 @@ function App() {
             </span>
             <button
               type="button"
-              onClick={() => setUser(null)}
+              onClick={() => {
+                localStorage.removeItem('username');
+                navigate('/');
+              }}
               className="rounded-xl border border-violet-400/25 px-4 py-2 text-sm font-medium text-violet-100 transition hover:border-violet-300/50 hover:bg-violet-500/10"
             >
               Sair
@@ -115,7 +126,7 @@ function App() {
             placeholder="Escreva uma mensagem"
           />
           <button
-            className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-indigo-500 to-violet-600 text-white transition hover:brightness-110"
+            className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-linear-to-br from-indigo-500 to-violet-600 text-white transition hover:brightness-110"
             type="submit"
             aria-label="Enviar"
           >
