@@ -1,7 +1,9 @@
 import logo from './assets/icons/Logo.png';
 import enviar from './assets/icons/enviar.png'
+import CardMessage from './components/cardMessage';
 
 function App() {
+  const user = 'guilherme';
   const allMessages = [
     {
       'id': 1,
@@ -29,7 +31,11 @@ function App() {
         <button className='bg-[#FF000080] w-15 h-10 text-gray-100 border-red-500 border-2 rounded-md'>Sair</button>
       </header>
       <main className='bg-indigo-950 w-full h-full flex flex-col justify-between'>
-        <div className=''></div>
+        <div className='w-full h-full flex flex-col'>
+          {allMessages.map((message) => {
+            return(<CardMessage message={message.message} userMsg={message.user} user={user} />)
+          })}
+        </div>
         <form className='p-5 flex justify-between' action=".">
           <input className='w-full mr-5 bg-violet-500' type="text" name="message" id="message" />
           <button className='bg-violet-800 rounded-md w-15 h-10 flex justify-center items-center cursor-pointer' type="submit">
