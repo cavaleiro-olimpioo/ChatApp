@@ -8,10 +8,21 @@ public class Program
     {
         var builder = WebApplication.CreateBuilder(args);
 
-        builder.Services.AddRazorPages();
         builder.Services.AddSignalR();
 
         builder.Services.AddDbContext<AppDbContext>(options => options.UseNpgsql(builder.Configuration.GetConnectionString("Default")));
+
+        builder.Services.AddCors(options =>
+        {
+           options.AddPolicy("AllowFrontend", policy =>
+           {
+               policy.WithOrigins("http://192.168.0.82:5173")
+                .AllowAnyHeader()
+                .AllowAnyMethod()
+                .AllowCredentials();
+
+           });
+        });
 
         var app = builder.Build();
 
@@ -25,9 +36,10 @@ public class Program
 
         app.UseRouting();
 
+        app.UseCors("AllowFrontend");
+
         app.UseAuthorization();
 
-        app.MapStaticAssets();
         app.MapHub<ChatHub>("/chatHub");
         
         app.Run();
